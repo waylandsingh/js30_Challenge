@@ -72,21 +72,34 @@
     // select the root element
     const root = document.querySelector(":root")
 
-    console.log(blurSlider.value)
+    // console.log(blurSlider.value)
 
-    spaceSlider.addEventListener("input", (e)=>{
-      // console.log(e.target) // what is the target of an event determined by?
-      root.style.setProperty('--spacing', spaceSlider.value + "px")
+    // spaceSlider.addEventListener("input", (e)=>{
+    //   // console.log(e.target) // what is the target of an event determined by?
+    //   root.style.setProperty('--spacing', spaceSlider.value + "px")
+    // })
+
+    // blurSlider.addEventListener("input",()=>{
+    //   root.style.setProperty('--blur', blurSlider.value + "px")
+    // })
+
+    // baseSlider.addEventListener("input", (e)=>{
+    //   root.style.setProperty("--base", baseSlider.value)
+    // })
+
+    const inputs = document.querySelectorAll(".controls input")
+
+    // use a function to do the updates instead
+    function handleUpdate() {
+      console.log(this.value)
+      console.log(`${this.value}${this.dataset.sizing? this.dataset.sizing:""}`)
+
+      root.style.setProperty(`--${this.id}`, `${this.value}${this.dataset.sizing||""}`)
+    }
+
+    inputs.forEach((input)=>{
+      input.addEventListener("input", handleUpdate)
     })
-
-    blurSlider.addEventListener("input",()=>{
-      root.style.setProperty('--blur', blurSlider.value + "px")
-    })
-
-    baseSlider.addEventListener("input", (e)=>{
-      root.style.setProperty("--base", baseSlider.value)
-    })
-
   </script>
 
 </body>
