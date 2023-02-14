@@ -11,7 +11,7 @@
     <div class="clock">
       <div class="clock-face">
         <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
+        <div class="hand minute-hand"></div>
         <div class="hand second-hand"></div>
       </div>
     </div>
@@ -67,6 +67,7 @@
       transform: rotate(90deg);
       transition: 0.06s;
       transition-timing-function: ease-in-out;
+      /* display:none; */
     }
 
   </style>
@@ -78,22 +79,26 @@
     const second = document.getElementsByClassName("second-hand")[0]
     console.log(second)
     const minute = document.getElementsByClassName("minute-hand")[0]
-    const hour = docuemnt.getElementsByClassName("hour-hand")[0]
-    
-    // first, this should be in a loop
-    // while (true) {
-    //   // next get the time, and
-    //   let currTime = new Date()
-    //   let currSecs = currTime.getSeconds()
+    const hour = document.getElementsByClassName("hour-hand")[0]
 
-    //     // if the time in seconds is different, update the seconds hand
-    //   if (currTime.getSeconds() != currSecs) {
+    // first, this should NOT be in a loop
+    function updateHands() {
+      // next get the time, and
+      let currTime = new Date()
+      let currSecs = currTime.getSeconds()
+      let currMin = currTime.getMinutes()
+      let currHour = currTime.getHours()
 
-    //   }
-    //     // if the minutes are different, update the minutes
+      // update the seconds hand
+      second.style.transform = `rotate(${(currSecs*6+90)}deg)`
+      minute.style.transform = `rotate(${currMin*6 + 90}deg)`
+      hour.style.transform = `rotate(${currHour*30+90}deg)`
+      
+        
+    }
 
-    //     // if the hours are different, update the hours
-    // }
+    setInterval(updateHands, 100)
+    second.style.display = "block"
   </script>
 </body>
 </html>
