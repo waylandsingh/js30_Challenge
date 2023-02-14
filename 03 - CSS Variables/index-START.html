@@ -23,6 +23,24 @@
 
   <style>
 
+    :root {
+      /* highest css level */
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 5px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base);
+    }
+
+
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -44,8 +62,31 @@
       width: 100px;
     }
   </style>
-
+    
   <script>
+    // this is where we are going to adjust the variables based on our sliders
+    const spaceSlider = document.getElementById("spacing")
+    const blurSlider = document.querySelector("#blur")
+    const baseSlider = document.querySelector("#base")
+
+    // select the root element
+    const root = document.querySelector(":root")
+
+    console.log(blurSlider.value)
+
+    spaceSlider.addEventListener("input", (e)=>{
+      // console.log(e.target) // what is the target of an event determined by?
+      root.style.setProperty('--spacing', spaceSlider.value + "px")
+    })
+
+    blurSlider.addEventListener("input",()=>{
+      root.style.setProperty('--blur', blurSlider.value + "px")
+    })
+
+    baseSlider.addEventListener("input", (e)=>{
+      root.style.setProperty("--base", baseSlider.value)
+    })
+
   </script>
 
 </body>
