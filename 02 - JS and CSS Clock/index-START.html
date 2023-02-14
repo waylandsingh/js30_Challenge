@@ -63,13 +63,37 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: 0.06s;
+      transition-timing-function: ease-in-out;
     }
 
   </style>
 
   <script>
+    // need to write JS that will apply a different rotation to each hand based on the time
 
+    // get references to second, minute, hour hands
+    const second = document.getElementsByClassName("second-hand")[0]
+    console.log(second)
+    const minute = document.getElementsByClassName("minute-hand")[0]
+    const hour = docuemnt.getElementsByClassName("hour-hand")[0]
+    
+    // first, this should be in a loop
+    // while (true) {
+    //   // next get the time, and
+    //   let currTime = new Date()
+    //   let currSecs = currTime.getSeconds()
 
+    //     // if the time in seconds is different, update the seconds hand
+    //   if (currTime.getSeconds() != currSecs) {
+
+    //   }
+    //     // if the minutes are different, update the minutes
+
+    //     // if the hours are different, update the hours
+    // }
   </script>
 </body>
 </html>
