@@ -84,10 +84,10 @@
     // first, this should NOT be in a loop
     function updateHands() {
       // next get the time, and
-      let currTime = new Date()
-      let currSecs = currTime.getSeconds()
-      let currMin = currTime.getMinutes()
-      let currHour = currTime.getHours()
+      const currTime = new Date()
+      const currSecs = currTime.getSeconds()
+      const currMin = currTime.getMinutes()
+      const currHour = currTime.getHours()
 
       // update the seconds hand
       second.style.transform = `rotate(${(currSecs*6+90)}deg)`
