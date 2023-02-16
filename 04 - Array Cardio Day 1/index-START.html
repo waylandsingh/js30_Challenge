@@ -38,29 +38,79 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    let oldies = inventors.filter((inventor)=>{
+      return (inventor.year<=1599 & inventor.year>=1500)
+    })
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    let names = inventors.map(inv=>{
+      return inv.first + ' ' + inv.last
+    })
+    // console.log(names)
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    let sortedByBirth = inventors.sort((a,b) => {
+      // returns positive if a > b, negative if a<b
+      return a.year > b.year
 
+    })
+
+    // console.log(sortedByBirth)
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    let totalYears = inventors.reduce((p,n)=>{
+      return p + (n.passed - n.year)
+    }, 0)
 
+    console.log(totalYears)
     // 5. Sort the inventors by years lived
+    let sortedByLifespan = inventors.sort((a,b)=>{
 
+      return a.passed-a.year < b.passed-b.year
+    })
+
+    // console.log(sortedByLifespan)
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // filter using string method includes
 
+    let deBoulevards = ['Boulevard de la Chapelle', 'Boulevard Malesherbes'].filter(entry=>{
+      if (entry.includes('de')) return true;
+      return false;
+    })
+
+    console.log(deBoulevards)
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    let alphaPeople = people.sort((a,b)=>{
+      // split on space then compare the last names
+      let bLast = b.split(' ')[1]
+      let aLast = a.split(' ')[1]
+
+      return a > b
+    })
+    console.log(alphaPeople)
+
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    let counts = {'null':0}
+    console.log(counts)
+    console.log(
+      data.reduce((acc, next)=>{
+        console.log(acc, next)
+        if (next in acc){
+          acc[next]+=1
+        } else {
+          acc[next] = 1
+        }
+        return acc
+      }, counts)
+    )
   </script>
 </body>
 </html>
