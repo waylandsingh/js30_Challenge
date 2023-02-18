@@ -27,6 +27,8 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display:flex;
+
     }
 
     .panel {
@@ -44,6 +46,13 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      flex: 1; 
+      /* each panel distributes spaces equally */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      
     }
 
     .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
@@ -57,7 +66,24 @@
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      border: 1px solid red;
+      flex: 1 0 auto; 
+      display:flex;
+      justify-content: center;
+      align-items: center;
+
     }
+    /* //handle animation for first child of panel (top word) */
+    .panel > *:first-child {
+      transform: translateY(-100%);
+    }
+    .panel.open-active >*:first-child {transform:translateY(0);}
+
+    /* handles animation for lastchild /bottom word */
+    .panel > *:last-child {
+      transform: translateY(100%);
+    } 
+    .panel.panel.open-active>*:last-child {transform:translateY(0);}
 
     .panel p {
       text-transform: uppercase;
@@ -72,6 +98,7 @@
 
     .panel.open {
       font-size: 40px;
+      flex: 5;
     }
 
   </style>
@@ -106,7 +133,41 @@
   </div>
 
   <script>
+    // time to make the panels get activated on click
+    // select the second child of each of the five panels and add an eventlistener
+    let panels = document.querySelectorAll(".panel")
 
+    panels.forEach((panel)=>{
+      panel.addEventListener("click", panelTransitionIn)
+    })
+
+    panels.forEach((panel)=>{
+       panel.addEventListener("transitionend", panelActivate)
+    })
+
+
+    function panelActivate(event) {
+      console.log(event.propertyName)
+      // this.classList.toggle('open-active') // this causes an issue with transition ends..
+      // check the property name of the transition and just make sure its the "last" one changes by the transitionIN toggle
+      if (event.propertyName.includes('flex')) {
+        this.classList.toggle('open-active')
+      }
+    }
+
+    function panelTransitionIn(event) {
+      this.classList.toggle('open')
+      
+      // console.log(event.target.parentNode)
+      // // if ! open-active, then
+      // if(!event.target.parentNode.classList.contains("open-active")){
+      //   event.target.parentNode.classList.add("open-active")
+      //   // event.target.parentNode.style.flex="5"
+      // } else {
+      //   event.target.parentNode.classList.remove("open-active")
+      // }
+      // // else
+    }
   </script>
 
 
