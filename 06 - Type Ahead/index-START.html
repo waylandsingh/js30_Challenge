@@ -25,20 +25,29 @@ fetch(endpoint)
   .then((response)=>response.json())
   .then((data)=>{cities.push(...data); console.log(cities)})
 
+// function to search the city/pop (filter)
 function searchCities(t) {
-  const term = t.toLowerCase()
-  let filtered = cities.filter((entry) => {
-    let [city, state] = [entry.city.toLowerCase(), entry.state.toLowerCase()]
-    if (city.includes(term) | state.includes(term)){
-      return true
-    }
-    return false
-  })
+  // use regular expr and the .match function on strings
+  const regex = new RegExp(t, 'gi') 
 
-  console.log(filtered)
+  // return the filtered result of searching cities for the term, t
+  return cities.filter(entry=>{
+    // get city/state
+    let [city, state] = [entry.city.toLowerCase(), entry.state.toLowerCase()]
+    
+    return city.match(regex) || state.match(regex)
+  })
+  // const term = t.toLowerCase()
+  // let filtered = cities.filter((entry) => {
+  //   let [city, state] = [entry.city.toLowerCase(), entry.state.toLowerCase()]
+  //   if (city.includes(term) | state.includes(term)){
+  //     return true
+  //   }
+  //   return false
+  // })
+  // console.log(filtered)
 }
 
-// function to search the city/pop (filter)
 
 // populate the list
 
