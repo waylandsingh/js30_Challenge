@@ -37,20 +37,30 @@ function searchCities(t) {
     
     return city.match(regex) || state.match(regex)
   })
-  // const term = t.toLowerCase()
-  // let filtered = cities.filter((entry) => {
-  //   let [city, state] = [entry.city.toLowerCase(), entry.state.toLowerCase()]
-  //   if (city.includes(term) | state.includes(term)){
-  //     return true
-  //   }
-  //   return false
-  // })
-  // console.log(filtered)
 }
 
+const searchBar = document.getElementsByClassName('search')[0]
+const suggestions = document.querySelector('.suggestions')
 
+console.log(searchBar)
 // populate the list
+function popListMatches() {
+  // calls the search cities function using the current text in the box
+  const results = searchCities(this.value)
+  animateDropDown(results)
+}
 
+function animateDropDown(results) {
+  // filter city, state, and population 
+  const newData = results.map(city=>{
+    console.log(city.city, city.state, city.population)
+  })
+  // wipe out current sugguestions
+  suggestions.innerHTML = ''
+
+}
+
+searchBar.addEventListener('selectionchange', popListMatches)
 </script>
 </body>
 </html>
