@@ -25,28 +25,15 @@ fetch(endpoint)
   .then((response)=>response.json())
   .then((data)=>{cities.push(...data); console.log(cities)})
 
-// function to search the city/pop (filter)
-function searchCities(t) {
-  // use regular expr and the .match function on strings
-  const regex = new RegExp(t, 'gi') 
-
-  // return the filtered result of searching cities for the term, t
-  return cities.filter(entry=>{
-    // get city/state
-    let [city, state] = [entry.city.toLowerCase(), entry.state.toLowerCase()]
-    
-    return city.match(regex) || state.match(regex)
-  })
-}
-
 const searchBar = document.getElementsByClassName('search')[0]
 const suggestions = document.querySelector('.suggestions')
+
+searchBar.addEventListener('selectionchange', popListMatches)
 
 // populate the list
 function popListMatches() {
   // calls the search cities function using the current text in the box
   const results = this.value && searchCities(this.value)
-
   suggestions.innerHTML = ''
 
   // conditional animate if there are results
@@ -60,20 +47,19 @@ function popListMatches() {
     : suggestions.innerHTML = '<li>Filter for a city</li><li>or a state</li>'
 }
 
-// function animateDropDown(results) {
-//   // filter city, state, and population 
-//   const newData = results.map(entry=>{
-//     const {city, state, population} = entry
-//     console.log('ok',entry.city, state, population)
-//     return {city, state, population}
-//   })
-//   // wipe out current sugguestions
-//   suggestions.innerHTML = ''
+// function to search the city/pop (filter)
+function searchCities(t) {
+  // use regular expr and the .match function on strings
+  const regex = new RegExp(t, 'gi') 
 
-//   console.log(newData)
-// }
+  // return the filtered result of searching cities for the term, t
+  return cities.filter(entry=>{
+    // get city/state
+    let [city, state] = [entry.city.toLowerCase(), entry.state.toLowerCase()]
+    return city.match(regex) || state.match(regex)
+  })
+}
 
-searchBar.addEventListener('selectionchange', popListMatches)
 </script>
 </body>
 </html>
