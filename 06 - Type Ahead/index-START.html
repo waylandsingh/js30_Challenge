@@ -38,13 +38,19 @@ function popListMatches() {
 
   // conditional animate if there are results
   results 
-    ? results.forEach(res=>{
+    ? suggestions.innerHTML = results.map(res=>{
         // make a new li element and append it 
-        let suggest = document.createElement('li')
-        suggest.innerText = `${res.city} ${res.state} ${res.population}`
-        suggestions.appendChild(suggest)
-      }) 
+        let suggest = `
+          <li>
+            <span class="name">${res.city} ${res.state} </span>
+            <span class="population">${res.population}</span>
+          </li>
+        `
+        
+        return suggest
+      }).join('')
     : suggestions.innerHTML = '<li>Filter for a city</li><li>or a state</li>'
+
 }
 
 // function to search the city/pop (filter)
