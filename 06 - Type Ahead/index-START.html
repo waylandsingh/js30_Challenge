@@ -45,26 +45,33 @@ const suggestions = document.querySelector('.suggestions')
 // populate the list
 function popListMatches() {
   // calls the search cities function using the current text in the box
-  const results = searchCities(this.value)
-  results.forEach(res=>{
-    // make a new li element and append it 
-    let suggest = document.createElement('li')
-    suggest.innerText = `${} ${} ${}`
-  })
-}
+  const results = this.value && searchCities(this.value)
 
-function animateDropDown(results) {
-  // filter city, state, and population 
-  const newData = results.map(entry=>{
-    const {city, state, population} = entry
-    console.log('ok',entry.city, state, population)
-    return {city, state, population}
-  })
-  // wipe out current sugguestions
   suggestions.innerHTML = ''
 
-  console.log(newData)
+  // conditional animate if there are results
+  results 
+    ? results.forEach(res=>{
+        // make a new li element and append it 
+        let suggest = document.createElement('li')
+        suggest.innerText = `${res.city} ${res.state} ${res.population}`
+        suggestions.appendChild(suggest)
+      }) 
+    : suggestions.innerHTML = '<li>Filter for a city</li><li>or a state</li>'
 }
+
+// function animateDropDown(results) {
+//   // filter city, state, and population 
+//   const newData = results.map(entry=>{
+//     const {city, state, population} = entry
+//     console.log('ok',entry.city, state, population)
+//     return {city, state, population}
+//   })
+//   // wipe out current sugguestions
+//   suggestions.innerHTML = ''
+
+//   console.log(newData)
+// }
 
 searchBar.addEventListener('selectionchange', popListMatches)
 </script>
