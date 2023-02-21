@@ -42,22 +42,28 @@ function searchCities(t) {
 const searchBar = document.getElementsByClassName('search')[0]
 const suggestions = document.querySelector('.suggestions')
 
-console.log(searchBar)
 // populate the list
 function popListMatches() {
   // calls the search cities function using the current text in the box
   const results = searchCities(this.value)
-  animateDropDown(results)
+  results.forEach(res=>{
+    // make a new li element and append it 
+    let suggest = document.createElement('li')
+    suggest.innerText = `${} ${} ${}`
+  })
 }
 
 function animateDropDown(results) {
   // filter city, state, and population 
-  const newData = results.map(city=>{
-    console.log(city.city, city.state, city.population)
+  const newData = results.map(entry=>{
+    const {city, state, population} = entry
+    console.log('ok',entry.city, state, population)
+    return {city, state, population}
   })
   // wipe out current sugguestions
   suggestions.innerHTML = ''
 
+  console.log(newData)
 }
 
 searchBar.addEventListener('selectionchange', popListMatches)
